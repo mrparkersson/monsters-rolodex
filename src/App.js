@@ -41,12 +41,8 @@ class App extends Component {
         <SearchBox
           onSearchChange={this.onSearchChange}
           placeholder="search monsters"
-          className="search-box"
+          className="monsters-search-box"
         />
-        {filteredMonsters.map((monster) => {
-          return <h1 key={monster.name}>{monster.name}</h1>;
-        })}
-
         <CardList monsters={filteredMonsters} />
       </div>
     );
