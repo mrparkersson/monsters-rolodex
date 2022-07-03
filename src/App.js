@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import CardList from './components/card-list/card-list.component';
 
 import './App.css';
+import SearchBox from './components/search-box/search-box.component';
 
 class App extends Component {
   constructor() {
@@ -16,14 +18,9 @@ class App extends Component {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((users) =>
-        this.setState(
-          () => {
-            return { monsters: users };
-          },
-          () => {
-            console.log(this.state);
-          }
-        )
+        this.setState(() => {
+          return { monsters: users };
+        })
       );
   }
 
@@ -41,15 +38,16 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input
+        <SearchBox
+          onSearchChange={this.onSearchChange}
+          placeholder="search monsters"
           className="search-box"
-          type="search"
-          placeholder="search-monsters"
-          onChange={this.onSearchChange}
         />
         {filteredMonsters.map((monster) => {
           return <h1 key={monster.name}>{monster.name}</h1>;
         })}
+
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
